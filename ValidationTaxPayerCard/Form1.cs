@@ -1,39 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace ValidationTaxPayerCard
+﻿namespace ValidationTaxPayerCard
 {
-    public partial class formMain : Form
+    using System;
+    using System.Drawing;
+    using System.Windows.Forms;
+
+    public partial class FormMain : Form
     {
-        public formMain()
+        public FormMain()
         {
             InitializeComponent();
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LinkLabel1LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             linkLblMiguelBarros.LinkVisited = true;
-            System.Diagnostics.Process.Start("https://www.linkedin.com/in/miguel-barros-08b4297/");
+            System.Diagnostics.Process.Start($"https://www.linkedin.com/in/miguel-barros-08b4297/");
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1Click(object sender, EventArgs e)
         {
-            bool resultOfValidation = IsValidContrib(txtNumber.Text.ToString()); ;
+            bool resultOfValidation = IsValidContrib(txtNumber.Text); ;
             if (resultOfValidation)
             {
-                tbxResultColor.Text = "CORRECT";
+                tbxResultColor.Text = Resource.Messages.CorrectNumber;
                 tbxResultColor.BackColor = Color.LightGreen;
             }
             else
             {
-                tbxResultColor.Text = "INCORRECT";
+                tbxResultColor.Text = Resource.Messages.IncorrectNumber;
                 tbxResultColor.BackColor = Color.Red;
             }
         }
@@ -42,10 +36,6 @@ namespace ValidationTaxPayerCard
         {
             bool functionReturnValue = false;
             string[] s = new string[9];
-            string Ss = null;
-            string C = null;
-            int i = 0;
-            long checkDigit = 0;
 
             s[0] = Convert.ToString(Contrib[0]);
             s[1] = Convert.ToString(Contrib[1]);
@@ -59,10 +49,17 @@ namespace ValidationTaxPayerCard
 
             if (Contrib.Length == 9)
             {
-                C = s[0];
+                string c = s[0];
+
+                if (c == null)
+                {
+                    throw new ArgumentNullException(nameof(Contrib));
+                }
+
                 if (s[0] == "1" || s[0] == "2" || s[0] == "5" || s[0] == "6" || s[0] == "9")
                 {
-                    checkDigit = Convert.ToInt32(C) * 9;
+                    long checkDigit = Convert.ToInt32(c) * 9;
+                    int i;
                     for (i = 2; i <= 8; i++)
                     {
                         checkDigit = checkDigit + (Convert.ToInt32(s[i - 1]) * (10 - i));
@@ -70,7 +67,6 @@ namespace ValidationTaxPayerCard
                     checkDigit = 11 - (checkDigit % 11);
                     if ((checkDigit >= 10))
                         checkDigit = 0;
-                    Ss = s[0] + s[1] + s[2] + s[3] + s[4] + s[5] + s[6] + s[7] + s[8];
                     if ((checkDigit == Convert.ToInt32(s[8])))
                         functionReturnValue = true;
                 }

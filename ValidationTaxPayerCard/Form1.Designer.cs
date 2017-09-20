@@ -1,6 +1,6 @@
 ﻿namespace ValidationTaxPayerCard
 {
-    partial class formMain
+    partial class FormMain
     {
         /// <summary>
         /// Required designer variable.
@@ -78,7 +78,7 @@
             this.linkLblMiguelBarros.TabIndex = 4;
             this.linkLblMiguelBarros.TabStop = true;
             this.linkLblMiguelBarros.Text = "Miguel Barros - Junir Consultant Engineer";
-            this.linkLblMiguelBarros.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.linkLblMiguelBarros.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel1LinkClicked);
             // 
             // button1
             // 
@@ -88,7 +88,7 @@
             this.button1.TabIndex = 5;
             this.button1.Text = "Validate";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Button1Click);
             // 
             // formMain
             // 
@@ -101,7 +101,7 @@
             this.Controls.Add(this.lblResult);
             this.Controls.Add(this.lblTaxPayer);
             this.Controls.Add(this.txtNumber);
-            this.Name = "formMain";
+            this.Name = "FormMain";
             this.Text = "Validation of Portuguese Tax Payer";
             this.ResumeLayout(false);
             this.PerformLayout();
