@@ -1,19 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace ValidationTaxPayerCard_CLI
 {
+    using System;
+    using System.Linq;
+
     public static class Program
     {
         static void Main(string[] args)
         {
-            for (int i = 0; i < args.Length; i++)
+            Console.WriteLine("Welcome to TaxPayerVerify. Type in a command.");
+            while (true)
             {
-                Console.WriteLine(Convert.ToString(args[i]));
+                args = new[] { Console.ReadLine() };
+                if (args.Contains("/h") || args.Contains("help") || args.Contains("--help"))
+                {
+                    DisplayHelp(args);
+                }
             }
         }
+
+        public static void DisplayHelp(string[] args)
+        {
+            Console.WriteLine("===== SOME MEANINGFULL HELP ==== ");
+        }
+
     }
 }
